@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AgroLens – AI Crop Doctor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="hero-section">
+    <div class="overlay">
+      <div class="header">
+        <h1>🌿 AgroLens</h1>
+        <p>See Beyond the Green – Diagnose. Predict. Prosper.</p>
+        <a href="#diagnose" class="cta-button">Start Crop Diagnosis →</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="diagnose" class="card-container">
+    <div class="card left-card">
+      <h2>Hello, Deekshana!</h2>
+      <p class="weather">🌤️ {{ weather }}</p>
+      <div class="metrics">
+        <div>🌱 Height: 80 cm</div>
+        <div>🟢 Health: Good</div>
+        <div>💧 Moisture: 68%</div>
+      </div>
+    </div>
+
+    <div class="card right-card">
+      <form action="/predict" method="post" enctype="multipart/form-data">
+        <label for="file">Upload Leaf Image:</label>
+        <input type="file" name="file" required><br><br>
+
+        <label for="lang">Language:</label>
+        <select name="lang">
+          <option value="en">English</option>
+          <option value="ta">Tamil</option>
+          <option value="hi">Hindi</option>
+        </select><br><br>
+
+        <!-- Auto-location fields -->
+        <input type="hidden" name="lat" id="lat">
+        <input type="hidden" name="lon" id="lon">
+
+        <button type="submit" class="predict-btn">Scan Crop with AgroLens AI</button>
+      </form>
+
+      {% if prediction %}
+      <div class="result-box">
+        <h3>Prediction Result:</h3>
+        <p><strong>Crop:</strong> Auto-detected</p>
+        <p><strong>Disease:</strong> {{ prediction }}</p>
+        <p><strong>Remedy:</strong> {{ remedy }}</p>
+        <p><strong>Weather:</strong> {{ weather }}</p>
+        <img src="{{ url_for('static', filename='gradcam.jpg') }}" alt="Grad-CAM heatmap" class="gradcam-img">
+        <button onclick="playAudio()">🔊 Explain in {{ lang }}</button>
+      </div>
+
+      {% if voice_url %}
+      <audio id="voiceAudio" autoplay>
+        <source src="{{ voice_url }}" type="audio/mpeg">
+        Your browser does not support the audio tag.
+      </audio>
+      {% endif %}
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- ✅ GPS + Voice JS here -->
+  <script>
+    // 📍 Get user's location and set hidden fields
+    navigator.geolocation.getCurrentPosition(function(position) {
+      document.getElementById("lat").value = position.coords.latitude;
+      document.getElementById("lon").value = position.coords.longitude;
+    }, function(error) {
+      console.warn("Geolocation error:", error.message);
+    });
+
+    // 🔊 Play voice response
+    function playAudio() {
+      const audio = document.getElementById("voiceAudio");
+      if (audio) {
+        audio.play();
+      } else {
+        alert("Voice not available.");
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5fdf6;
+  }
+  
+  .hero-section {
+    background: url("/static/bg.png") center/cover no-repeat;
+    height: 50vh;
+    position: relative;
+  }
+  
+  
+  .overlay {
+    background-color: rgba(0, 100, 0, 0.5);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+  }
+  
+  .header h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .header p {
+    font-size: 18px;
+  }
+  
+  .cta-button {
+    margin-top: 15px;
+    padding: 12px 20px;
+    background-color: white;
+    color: green;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px;
+  }
+  
+  .card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 100, 0, 0.15);
+    width: 400px;
+  }
+  
+  .left-card .weather {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .metrics div {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  .right-card form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .predict-btn {
+    background-color: #2e7d32;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .result-box {
+    margin-top: 20px;
+  }
+  
+  .gradcam-img {
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 8px;
+  }
+  

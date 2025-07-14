@@ -1,0 +1,8 @@
+flask
+flask-cors
+tensorflow
+keras
+opencv-python
+requests
+deep-translator
+gTTS
